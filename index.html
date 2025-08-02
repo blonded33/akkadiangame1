@@ -1,13 +1,11 @@
-<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Akadça Yazıt Çözme Oyunu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Tallings:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&family=Skranji:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;700&display=swap');
+        /* @font-face tanımını kaldırdık çünkü artık Google Fonts kullanıyoruz */
         
         * {
             margin: 0;
@@ -27,7 +25,7 @@
         }
 
         body {
-            font-family: 'Urbanist', serif;
+            font-family: 'Skranji', serif;
             background: #044156;
             min-height: 100vh;
             color: var(--white);
@@ -51,7 +49,7 @@
         }
 
         .game-title {
-            font-family: 'Tallings', serif;
+            font-family: 'Skranji', serif;
             font-size: 3em;
             font-weight: 700;
             color: var(--gold);
@@ -93,7 +91,7 @@
         }
 
         .stat-value {
-            font-family: 'Tallings', serif;
+            font-family: 'Skranji', serif;
             font-size: 1.8em;
             font-weight: 600;
             color: var(--gold);
@@ -115,7 +113,7 @@
         }
 
         .inscription-title {
-            font-family: 'Tallings', serif;
+            font-family: 'Skranji', serif;
             font-size: 1.5em;
             color: var(--gold);
             margin-bottom: 20px;
@@ -125,7 +123,7 @@
         }
 
         .inscription-text {
-            font-family: 'Tallings', serif;
+            font-family: 'Skranji', serif;
             font-size: 2.5em;
             line-height: 1.6;
             text-align: center;
@@ -273,7 +271,7 @@
         }
 
         .alphabet-title {
-            font-family: 'Tallings', serif;
+            font-family: 'Skranji', serif;
             font-size: 1.3em;
             color: var(--gold);
             margin-bottom: 15px;
@@ -322,7 +320,7 @@
         }
 
         .cuneiform-char {
-            font-family: 'Tallings', serif;
+            font-family: 'Skranji', serif;
             font-size: 1.5em;
             color: var(--gold-light);
             margin-bottom: 3px;
@@ -433,13 +431,20 @@
             display: none;
         }
 
-        @media (max-width: 768px) {
+               @media (max-width: 768px) {
             .game-area {
                 grid-template-columns: 1fr;
             }
             
             .game-title {
-                font-size: 2em;
+                font-size: 1.5em;
+                letter-spacing: 1px;
+                margin-bottom: 5px;
+            }
+            
+            .game-subtitle {
+                font-size: 1em;
+                margin-bottom: 15px;
             }
             
             .inscription-text {
@@ -448,7 +453,32 @@
             
             .game-stats {
                 flex-wrap: wrap;
-                gap: 15px;
+                gap: 8px;
+                margin-bottom: 15px;
+            }
+            
+            .stat-box {
+                padding: 8px 12px;
+                min-width: calc(50% - 4px);
+                flex: 1;
+            }
+            
+            .stat-label {
+                font-size: 0.7em;
+                margin-bottom: 2px;
+            }
+            
+            .stat-value {
+                font-size: 1.3em;
+            }
+            
+            .game-header {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            
+            .inscription-panel {
+                padding: 20px;
             }
             
             .multiple-choice {
@@ -461,12 +491,25 @@
                 font-size: 0.9em;
             }
         }
+
+        .choice-btn.correct {
+            background: #4CAF50 !important;
+            color: #fff !important;
+            border-color: #388e3c !important;
+        }
+        .choice-btn.incorrect {
+            background: #f44336 !important;
+            color: #fff !important;
+            border-color: #b71c1c !important;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="game-header">
-            <h1 class="game-title">Akadça Yazıt Çözme</h1>
+            <div style="width: 100%; max-width: 480px; display: block; margin: 0 auto 10px auto; text-align: center;">
+                <span style="font-family: 'Skranji', serif; font-size: 2.5em; color: var(--gold); letter-spacing: 2px;">AKADÇA YAZIT ÇÖZME</span>
+            </div>
             <p class="game-subtitle">Antik Mezopotamya yazıtlarını çözerek puanlar kazanın!</p>
             
             <div class="game-stats">
@@ -495,7 +538,9 @@
 
         <div class="game-area">
             <div class="inscription-panel">
-                <h2 class="inscription-title">Yazıt</h2>
+                <div style="width: 120px; display: block; margin: 0 auto 20px auto; text-align: center;">
+                    <span style="font-family: 'Skranji', serif; font-size: 1.5em; color: var(--gold); letter-spacing: 2px;">YAZIT</span>
+                </div>
                 <div class="inscription-text" id="inscriptionText">
                     𒈾 𒀸 𒈨𒍑
                 </div>
@@ -510,7 +555,6 @@
                 
                 <div class="game-controls">
                     <button class="btn" onclick="showHint()">İpucu</button>
-                    <button class="btn" onclick="checkAnswer()">Cevabı Kontrol Et</button>
                     <button class="btn" onclick="skipQuestion()">Geç</button>
                     <button class="btn" onclick="newGame()">Yeni Oyun</button>
                 </div>
@@ -518,7 +562,9 @@
 
             <div class="alphabet-panel">
                 <div class="alphabet-header" onclick="toggleAlphabet()">
-                    <h3 class="alphabet-title">Alfabe</h3>
+                    <div style="width: 120px; display: block; margin: 0 auto 0 0; text-align: center;">
+                        <span style="font-family: 'Skranji', serif; font-size: 1.8em; color: var(--gold); letter-spacing: 2px;">Alfabe</span>
+                    </div>
                     <span class="alphabet-toggle" id="alphabetToggle">▶</span>
                 </div>
                 <div class="alphabet-content collapsed" id="alphabetContent">
@@ -613,7 +659,8 @@
             timer: 0,
             timerInterval: null,
             hintsUsed: 0,
-            selectedAnswer: null
+            selectedAnswer: null,
+            locked: false
         };
 
         // Oyunu başlat
@@ -659,7 +706,8 @@
             document.getElementById('feedback').classList.remove('show');
             document.getElementById('hintText').style.display = 'none';
             gameState.selectedAnswer = null;
-            
+            gameState.locked = false;
+
             createChoices(question.choices);
             updateProgress();
         }
@@ -668,92 +716,64 @@
         function createChoices(choices) {
             const multipleChoice = document.getElementById('multipleChoice');
             multipleChoice.innerHTML = '';
-            
+
             // Şıkları karıştır
             const shuffledChoices = [...choices].sort(() => Math.random() - 0.5);
-            
-            shuffledChoices.forEach((choice, index) => {
+
+            shuffledChoices.forEach((choice) => {
                 const choiceBtn = document.createElement('button');
                 choiceBtn.className = 'choice-btn';
                 choiceBtn.textContent = choice;
                 choiceBtn.onclick = () => selectAnswer(choice, choiceBtn);
+                choiceBtn.disabled = false;
                 multipleChoice.appendChild(choiceBtn);
             });
         }
 
         // Cevap seç
         function selectAnswer(answer, button) {
-            // Önceki seçimi temizle
+            if (gameState.locked) return;
+            gameState.locked = true;
+
+            // Tüm şıkları devre dışı bırak ve renklerini sıfırla
             document.querySelectorAll('.choice-btn').forEach(btn => {
-                btn.classList.remove('selected');
+                btn.disabled = true;
+                btn.classList.remove('selected', 'correct', 'incorrect');
             });
-            
-            // Yeni seçimi işaretle
+
+            // Seçilen şık
             button.classList.add('selected');
             gameState.selectedAnswer = answer;
-        }
 
-        // Cevabı kontrol et
-        function checkAnswer() {
-            if (!gameState.selectedAnswer) {
-                const feedback = document.getElementById('feedback');
-                feedback.textContent = '⚠️ Lütfen bir cevap seçin!';
-                feedback.className = 'feedback incorrect show';
-                setTimeout(() => {
-                    feedback.classList.remove('show');
-                }, 2000);
-                return;
-            }
-            
-            const userAnswer = gameState.selectedAnswer.toLowerCase();
+            const userAnswer = answer.toLowerCase();
             const correctAnswer = gameQuestions[gameState.currentQuestion].answer.toLowerCase();
-            const feedback = document.getElementById('feedback');
-            
+
             if (userAnswer === correctAnswer) {
-                // Doğru cevap
-                feedback.textContent = '🎉 Doğru! Harika bir çeviri!';
-                feedback.className = 'feedback correct show';
-                
+                button.classList.add('correct');
+                showFeedback('Doğru! Harika bir çeviri!', true);
                 gameState.score += 100 - (gameState.hintsUsed * 20);
                 gameState.correct++;
                 
-                setTimeout(() => {
+                // Doğru cevaplarda 500ms (yarım saniye) sonra geç
+                setTimeout(function() {
+                    nextQuestion();
+                }, 500);
+            } else {
+                button.classList.add('incorrect');
+                // Doğru cevabı da yeşil göster
+                document.querySelectorAll('.choice-btn').forEach(btn => {
+                    if (btn.textContent.toLowerCase() === correctAnswer) {
+                        btn.classList.add('correct');
+                    }
+                });
+                showFeedback(`Yanlış. Doğru cevap: ${gameQuestions[gameState.currentQuestion].answer}`, false);
+                
+                // Yanlış cevaplarda 2000ms (2 saniye) sonra geç
+                setTimeout(function() {
                     nextQuestion();
                 }, 2000);
-            } else {
-                // Yanlış cevap
-                feedback.textContent = `❌ Yanlış. Doğru cevap: ${gameQuestions[gameState.currentQuestion].answer}`;
-                feedback.className = 'feedback incorrect show';
-                
-                setTimeout(() => {
-                    feedback.classList.remove('show');
-                }, 3000);
             }
-            
             updateStats();
-        }
-
-        // Sonraki soru
-        function nextQuestion() {
-            gameState.currentQuestion++;
-            gameState.hintsUsed = 0;
-            
-            if (gameState.currentQuestion % 3 === 0) {
-                gameState.level++;
-            }
-            
-            loadQuestion();
-        }
-
-        // Soruyu geç
-        function skipQuestion() {
-            const feedback = document.getElementById('feedback');
-            feedback.textContent = `⏭️ Doğru cevap: ${gameQuestions[gameState.currentQuestion].answer}`;
-            feedback.className = 'feedback show';
-            
-            setTimeout(() => {
-                nextQuestion();
-            }, 2000);
         }
 
         // İpucu göster
@@ -774,7 +794,8 @@
                 timer: 0,
                 timerInterval: null,
                 hintsUsed: 0,
-                selectedAnswer: null
+                selectedAnswer: null,
+                locked: false
             };
             
             if (gameState.timerInterval) {
@@ -821,8 +842,6 @@
             document.getElementById('inscriptionText').textContent = '🎉 OYUN TAMAMLANDI 🎉';
         }
 
-
-
         // Alfabe panelini aç/kapat
         function toggleAlphabet() {
             const content = document.getElementById('alphabetContent');
@@ -843,6 +862,47 @@
 
         // Oyunu başlat
         initGame();
+
+        function skipQuestion() {
+            if (gameState.locked) return;
+            gameState.locked = true;
+
+            const feedback = document.getElementById('feedback');
+            feedback.textContent = `⏭️ Doğru cevap: ${gameQuestions[gameState.currentQuestion].answer}`;
+            feedback.className = 'feedback show';
+
+            // Doğru cevabı yeşil göster
+            const correctAnswer = gameQuestions[gameState.currentQuestion].answer.toLowerCase();
+            document.querySelectorAll('.choice-btn').forEach(btn => {
+                btn.disabled = true;
+                if (btn.textContent.toLowerCase() === correctAnswer) {
+                    btn.classList.add('correct');
+                }
+            });
+
+            setTimeout(function() {
+                nextQuestion();
+            }, 1200);
+        }
+
+        function nextQuestion() {
+            gameState.currentQuestion++;
+            gameState.hintsUsed = 0;
+            gameState.selectedAnswer = null;
+            gameState.locked = false;
+
+            if (gameState.currentQuestion % 3 === 0) {
+                gameState.level++;
+            }
+
+            loadQuestion();
+        }
+
+        function showFeedback(message, isCorrect) {
+            const feedback = document.getElementById('feedback');
+            feedback.textContent = message;
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+        }
     </script>
 </body>
 </html>
